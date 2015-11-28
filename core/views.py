@@ -10,4 +10,4 @@ from .models import *
 def home(request):
     c = RequestContext(request)
 
-    return render_to_response('index.html', c)
+    return render_to_response('core/index.html', c)
