@@ -11,7 +11,8 @@ class RegisterView(SuccessMixin, CreateView):
     model = User
     form_class = RegisterForm
     success_message = 'User created with success!'
-    success_url = reverse_lazy('auth:login')
+    success_url = reverse_lazy('user:login')
+    template_name = 'user/register_user.html'
 
 
-register = RegisterView.as_view()
+register_user = RegisterView.as_view()

@@ -1,3 +1,6 @@
+from django.contrib import messages
+
+
 class SuccessMixin(object):
 
     def get_success_url(self):

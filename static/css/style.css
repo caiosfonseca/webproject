@@ -26,3 +26,8 @@
 .error-message{
   color: #a94442 !important;
 }
+
+.message-alert{
+  padding: 10px;
+  margin-bottom: 10px;
+}

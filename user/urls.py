@@ -60,7 +60,12 @@ urlpatterns = [
         name='password_reset_complete'
     ),
 
+    url(
+        r'register_user/$',
+        'user.views.register_user',
+        name='register_user'
+    ),
+
     # url(r'change_password/$', login, name='change_password'),
-    # url(r'register/$', login, name='register'),
     # url(r'edit/$', login, name='edit'),
 ]
