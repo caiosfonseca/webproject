@@ -72,6 +72,19 @@ urlpatterns = [
         name='update_user'
     ),
 
-    # url(r'change_password/$', login, name='change_password'),
-    # url(r'edit/$', login, name='edit'),
+    url(
+        r'change_password/$',
+        'django.contrib.auth.views.password_change',
+        {
+            'template_name': 'user/password_change.html',
+            'post_change_redirect': 'user:change_password_done'
+        },
+        name='change_password'
+    ),
+
+    url(
+        r'change_password_done/$',
+        'user.views.password_change_done',
+        name='change_password_done'
+    ),
 ]

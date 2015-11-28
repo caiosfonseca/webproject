@@ -1,7 +1,9 @@
+from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
+from django.views.generic.base import RedirectView
 
 from braces.views import LoginRequiredMixin
 
@@ -32,3 +34,15 @@ class UpdateUserView(LoginRequiredMixin, SuccessMixin, UpdateView):
 
 
 update_user = UpdateUserView.as_view()
+
+
+class PasswordChangeDone(LoginRequiredMixin, RedirectView):
+
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        messages.success(self.request, "Password changed with success!")
+        return reverse_lazy('core:home')
+
+
+password_change_done = PasswordChangeDone.as_view()

@@ -19,7 +19,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.get_full_name }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{% url 'user:update_user' user.pk %}">Edit Profile<span class="glyphicon glyphicon-user icon-right" aria-hidden="true"></span></a></li>
-            <li><a href="#">Change Password<span class="glyphicon glyphicon-cog icon-right" aria-hidden="true"></span></a></li>
+            <li><a href="{% url 'user:change_password' %}">Change Password<span class="glyphicon glyphicon-cog icon-right" aria-hidden="true"></span></a></li>
             <li><a href="{% url 'user:logout' %}">Logout<span class="glyphicon glyphicon-off icon-right" aria-hidden="true"></span></a></li>
           </ul>
         </li>
