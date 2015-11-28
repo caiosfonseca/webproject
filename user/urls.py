@@ -66,6 +66,12 @@ urlpatterns = [
         name='register_user'
     ),
 
+    url(
+        r'update_profile/(?P<pk>[\d]+)/$',
+        'user.views.update_user',
+        name='update_user'
+    ),
+
     # url(r'change_password/$', login, name='change_password'),
     # url(r'edit/$', login, name='edit'),
 ]
