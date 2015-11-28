@@ -1,3 +1,28 @@
 .border-edges{
     border-radius: 0px;
 }
+
+.login-panel{
+  width: 400px;
+  background-color: #f7f7f7;
+  margin: 150px auto;
+  border-radius: 5px 5px 5px 5px;
+  padding: 25px;
+}
+
+.login-panel > h3{
+  margin:0;
+  margin-bottom: 10px;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.align-right{
+  text-align: right;
+}
+
+.error-message{
+  color: #a94442 !important;
+}
