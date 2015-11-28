@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'user'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -90,7 +91,7 @@ DATABASES['default'] = dj_database_url.config()
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'pt_BR'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'America/Recife'
 
@@ -100,6 +101,18 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_URL = 'user:login'
+
+LOGIN_REDIRECT_URL = 'core:home'
+
+LOGOUT_URL = 'user:logout'
+
+# Email settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mineracaoweb2015.2@gmail.com'
+EMAIL_HOST_PASSWORD = 'mineracao2015.2'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
@@ -115,4 +128,3 @@ try:
     from .local_settings import *
 except ImportError:
     pass
-    
