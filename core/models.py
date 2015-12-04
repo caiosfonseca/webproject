@@ -17,11 +17,14 @@ class Movie(models.Model):
 
     genres = models.ManyToManyField('Genre')
 
-    directors = models.ManyToManyField('Person', related_name='directors')
-    producers = models.ManyToManyField('Person', related_name='producerts')
-    casting = models.ManyToManyField('Person', related_name='casting')
+    directors = models.ManyToManyField('Person', related_name='directors',
+                                       null=True, blank=True)
+    producers = models.ManyToManyField('Person', related_name='producerts',
+                                       null=True, blank=True)
+    casting = models.ManyToManyField('Person', related_name='casting',
+                                       null=True, blank=True)
 
-    similars = models.ManyToManyField('Movie')
+    similars = models.ManyToManyField('Movie', null=True, blank=True)
 
 
 

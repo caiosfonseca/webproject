@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+{% block title %}People{% endblock %}
+{% load staticfiles %}
+{% block body_content %}
+  <div class="col-lg-12">
+    {% for person in object_list %}
+      <div class="col-lg-2">
+        <a href="{% url 'core:person_detail' person.pk %}">
+          <img src="{{ person.profile_path }}" alt="{{ person.name }}" width="150" height="200"/>
+          <p>{{ person.name }}</p>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

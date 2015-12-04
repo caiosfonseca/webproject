@@ -1,0 +1,8 @@
+{% extends 'core/base.html' %}
+{% block title %}People - {{ object.title }}{% endblock %}
+{% load staticfiles %}
+{% block body_content %}
+  <p><b>Title:</b> {{ object.title }}</p>
+  <p><b>Release Date:</b> {{ object.release_date }}</p>
+  <p><b>Overview</b> {{ object.overview }}</p>
+{% endblock %}

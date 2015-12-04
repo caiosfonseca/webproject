@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+{% block title %}People{% endblock %}
+{% load staticfiles %}
+{% block body_content %}
+  <div class="col-lg-12">
+    {% for movie in object_list %}
+      <div class="col-lg-2">
+        <a href="{% url 'core:movie_detail' movie.pk %}">
+          <img src="{{ movie.poster_path }}" alt="{{ movie.title }}" width="150" height="200"/>
+          <p>{{ movie.title }}</p>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
