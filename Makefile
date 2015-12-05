@@ -22,3 +22,12 @@ migrations:
 
 create_user:
 	python manage.py createsuperuser
+
+fixtures:
+	python manage.py loaddata core/fixtures/genres.json
+
+sync:
+	make clean
+	make new_db
+	make fixtures
+	make create_user

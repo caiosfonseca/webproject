@@ -18,13 +18,13 @@ class Movie(models.Model):
     genres = models.ManyToManyField('Genre')
 
     directors = models.ManyToManyField('Person', related_name='directors',
-                                       null=True, blank=True)
+                                       blank=True)
     producers = models.ManyToManyField('Person', related_name='producerts',
-                                       null=True, blank=True)
+                                       blank=True)
     casting = models.ManyToManyField('Person', related_name='casting',
-                                       null=True, blank=True)
+                                       blank=True)
 
-    similars = models.ManyToManyField('Movie', null=True, blank=True)
+    similars = models.ManyToManyField('Movie', blank=True)
 
 
 
@@ -44,8 +44,8 @@ class Person(models.Model):
 
 class Genre(models.Model):
 
+    tmdb_id = models.IntegerField(unique=True)
     name = models.CharField(max_length=255)
-    genre_id = models.IntegerField()
 
 
 class Vote(models.Model):
