@@ -17,17 +17,31 @@
     <body class="">
         {% include 'core/navbar.html' %}
         <div class="col-md-12 body_content">
-            <form class="col-md-12" method="get" action="{% url 'core:movies_search' %}">
-                <div class="search_form form-group">
-                    <input type="text" class="form-control" id="movie_search" name="query" placeholder="Search Movies" list="movie_list">
-                    <datalist id="movie_list">
-                      {% for movie in movie_list %}
-                        <option value="{{ movie.title }}">
-                      {% endfor %}
-                    </datalist>
-                </div>
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
+            {% if movie_list %}
+                <form class="col-md-12" method="get" action="{% url 'core:movies_search' %}">
+                    <div class="search_form form-group">
+                        <input type="text" class="form-control" id="movie_search" name="query" placeholder="Search Movies" list="movie_list">
+                        <datalist id="movie_list">
+                          {% for movie in movie_list %}
+                            <option value="{{ movie.title }}">
+                          {% endfor %}
+                        </datalist>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            {% else %}
+                <form class="col-md-12" method="get" action="{% url 'core:people_search' %}">
+                    <div class="search_form form-group">
+                        <input type="text" class="form-control" id="people_search" name="query" placeholder="Search People" list="people_list">
+                        <datalist id="people_list">
+                          {% for people in people_list %}
+                            <option value="{{ people.name }}">
+                          {% endfor %}
+                        </datalist>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            {% endif %}
             {% block body_content %}
             {% endblock %}
         </div>

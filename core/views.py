@@ -10,6 +10,7 @@ from django.views.generic import RedirectView
 from braces.views import LoginRequiredMixin
 from core.models import Movie, Person
 from core.mixins import MovieListMixin, get_movie_list, register_vote
+from core.mixins import PeopleListMixin, get_people_list
 from core.mixins import GetVoteMixin
 
 
@@ -28,12 +29,12 @@ class MovieDetailView(LoginRequiredMixin, MovieListMixin, GetVoteMixin, DetailVi
     model = Movie
 
 
-class PersonListView(LoginRequiredMixin, MovieListMixin, ListView):
+class PersonListView(LoginRequiredMixin, PeopleListMixin, ListView):
 
     model = Person
 
 
-class PersonDetailView(LoginRequiredMixin, MovieListMixin, DetailView):
+class PersonDetailView(LoginRequiredMixin, PeopleListMixin, DetailView):
 
     model = Person
 
@@ -51,6 +52,21 @@ class MovieSearchView(LoginRequiredMixin, View):
         except Movie.DoesNotExist:
             movies = Movie.objects.filter(title__icontains=query)
             context = {'object_list': movies, 'movie_list': get_movie_list()}
+            return render(request, self.template_name, context)
+
+class PersonSearchView(LoginRequiredMixin, View):
+
+    template_name = 'core/people_list.html'
+
+    def get(self, request, *args, **kwargs):
+        query = self.request.GET.get('query')
+        try:
+            person = Person.objects.get(name=query)
+            redirect_url = reverse_lazy('core:person_detail', args=[person.pk])
+            return HttpResponseRedirect(redirect_url)
+        except Person.DoesNotExist:
+            peoples = Person.objects.filter(name__icontains=query)
+            context = {'object_list': peoples, 'people_list': get_people_list()}
             return render(request, self.template_name, context)
 
 

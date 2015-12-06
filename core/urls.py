@@ -7,6 +7,7 @@ from .views import MovieDetailView
 from .views import MovieSearchView
 from .views import PersonListView
 from .views import PersonDetailView
+from .views import PersonSearchView
 
 urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home'),
@@ -18,6 +19,8 @@ urlpatterns = [
     url(r'^people/$', PersonListView.as_view(), name='people_list'),
     url(r'^person/(?P<pk>[\d]+)/$', PersonDetailView.as_view(),
         name='person_detail'),
+    url(r'^people_search/$', PersonSearchView.as_view(),
+        name='people_search'),
     url(r'^vote/(?P<pk>[\d]+)/(?P<status>[\w]+)/$', VoteView.as_view(),
         name='vote')
 ]

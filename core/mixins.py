@@ -1,5 +1,6 @@
 from core.models import Movie
 from core.models import Vote
+from core.models import Person
 
 
 class MovieListMixin(object):
@@ -37,3 +38,15 @@ class GetVoteMixin(object):
             vote = None
         context['vote'] = vote
         return context
+
+class PeopleListMixin(object):
+
+    def get_context_data(self, **kwargs):
+        context = super(PeopleListMixin, self).get_context_data(**kwargs)
+        context['people_list'] = get_people_list()
+        return context
+
+
+def get_people_list():
+    people_list = Person.objects.all()
+    return people_list
