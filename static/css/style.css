@@ -108,3 +108,20 @@ object { display: none; }
 .sa-right {
     right: 15px;
 }
+
+.login_links, .login_links > a{
+  text-decoration: none !important;
+  width: 110px;
+}
+
+.float_left{
+  float: left;
+}
+
+.float_right{
+  float: right;
+}
+
+.login_buttons{
+  height: 35px;
+}
