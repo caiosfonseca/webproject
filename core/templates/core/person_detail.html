@@ -2,7 +2,10 @@
 {% block title %}People - {{ object.name }}{% endblock %}
 {% load staticfiles %}
 {% block body_content %}
-  <p><b>Name:</b> {{ object.name }}</p>
-  <p><b>Birthday:</b> {{ object.birthday }}</p>
-  <p><b>Place of Birth</b> {{ object.place_of_birth }}</p>
+  <img alt="{{ object.name }}_profile_pic" src="{{ object.profile_path }}">
+  <p><b>Name:</b> {{ object.name }} ({{ object.nickname }})</p>
+  <p><b>Birthday:</b> {{ object.birthday }} - {{ object.deathday }}</p>
+  <p><b>Place of Birth:</b> {{ object.place_of_birth }}</p>
+  <p><b>Biography:</b> {{ object.biography }}</p>
+  <p><b>Popularity:</b> {{ object.popularity }}</p>
 {% endblock %}

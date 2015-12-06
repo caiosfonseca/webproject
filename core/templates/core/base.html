@@ -20,7 +20,7 @@
             {% if movie_list %}
                 <form class="col-md-12" method="get" action="{% url 'core:movies_search' %}">
                     <div class="search_form form-group">
-                        <input type="text" class="form-control" id="movie_search" name="query" placeholder="Search Movies" list="movie_list">
+                        <input type="text" class="form-control" id="search_input" name="query" placeholder="Search Movies" list="movie_list">
                         <datalist id="movie_list">
                           {% for movie in movie_list %}
                             <option value="{{ movie.title }}">
@@ -32,7 +32,7 @@
             {% else %}
                 <form class="col-md-12" method="get" action="{% url 'core:people_search' %}">
                     <div class="search_form form-group">
-                        <input type="text" class="form-control" id="people_search" name="query" placeholder="Search People" list="people_list">
+                        <input type="text" class="form-control" id="search_input" name="query" placeholder="Search People" list="people_list">
                         <datalist id="people_list">
                           {% for people in people_list %}
                             <option value="{{ people.name }}">
