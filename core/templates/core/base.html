@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{% static 'bootstrap-3.3.6-dist/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <script src="{% static 'js/jquery-1.11.3.js' %}"></script>
-        <script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>        
+        <script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>
 
         {% block head %}
         {% endblock %}
@@ -17,6 +17,17 @@
     <body class="">
         {% include 'core/navbar.html' %}
         <div class="col-md-12 body_content">
+            <form class="col-md-12" method="get" action="{% url 'core:movies_search' %}">
+                <div class="search_form form-group">
+                    <input type="text" class="form-control" id="movie_search" name="query" placeholder="Search Movies" list="movie_list">
+                    <datalist id="movie_list">
+                      {% for movie in movie_list %}
+                        <option value="{{ movie.title }}">
+                      {% endfor %}
+                    </datalist>
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
             {% block body_content %}
             {% endblock %}
         </div>
