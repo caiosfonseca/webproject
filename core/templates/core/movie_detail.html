@@ -2,6 +2,20 @@
 {% block title %}People - {{ object.title }}{% endblock %}
 {% load staticfiles %}
 {% block body_content %}
+  <div class="col-lg-4">
+    {% if vote %}
+      {% if vote.status == 'like' %}
+        <div class="col-lg-2 btn btn-success" type="button" name="button" href="{% url 'core:vote' object.pk 'like' %}">Like</div>
+        <a class="col-lg-2 btn btn-danger" type="button" name="button" href="{% url 'core:vote' object.pk 'dislike' %}" disabled>Dislike</a>
+      {% else %}
+        <a class="col-lg-2 btn btn-success" type="button" name="button" href="{% url 'core:vote' object.pk 'like' %}" disabled>Like</a>
+        <div class="col-lg-2 btn btn-danger" type="button" name="button" href="{% url 'core:vote' object.pk 'dislike' %}">Dislike</div>
+      {% endif %}
+    {% else %}
+      <a class="col-lg-2 btn btn-success" type="button" name="button" href="{% url 'core:vote' object.pk 'like' %}">Like</a>
+      <a class="col-lg-2 btn btn-danger" type="button" name="button" href="{% url 'core:vote' object.pk 'dislike' %}">Dislike</a>
+    {% endif %}
+  </div>
   <p><b>Title:</b> {{ object.title }}</p>
   <p><b>Release Date:</b> {{ object.release_date }}</p>
   <p><b>Overview</b> {{ object.overview }}</p>

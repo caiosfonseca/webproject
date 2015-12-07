@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from core.enum import PERSON_JOB
-from core.enum import VOTE_STATUS
 
 
 class Movie(models.Model):
@@ -59,6 +57,11 @@ class Genre(models.Model):
 
 class Vote(models.Model):
 
+    VOTE_STATUS = (
+        ('dislike', 'Dislike'),
+        ('like', 'Like')
+    )
+
     user = models.ForeignKey(User)
-    movies = models.ForeignKey('Movie')
-    status = models.IntegerField(choices=VOTE_STATUS)
+    movie = models.ForeignKey('Movie')
+    status = models.CharField(max_length=7, choices=VOTE_STATUS)

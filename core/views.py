@@ -6,9 +6,11 @@ from django.views.generic import View
 from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.views.generic import TemplateView
+from django.views.generic import RedirectView
 from braces.views import LoginRequiredMixin
 from core.models import Movie, Person
-from core.mixins import MovieListMixin, get_movie_list
+from core.mixins import MovieListMixin, get_movie_list, register_vote
+from core.mixins import GetVoteMixin
 
 
 class HomeView(LoginRequiredMixin, MovieListMixin, TemplateView):
@@ -21,7 +23,7 @@ class MovieListView(LoginRequiredMixin, MovieListMixin, ListView):
     model = Movie
 
 
-class MovieDetailView(LoginRequiredMixin, MovieListMixin, DetailView):
+class MovieDetailView(LoginRequiredMixin, MovieListMixin, GetVoteMixin, DetailView):
 
     model = Movie
 
@@ -36,7 +38,7 @@ class PersonDetailView(LoginRequiredMixin, MovieListMixin, DetailView):
     model = Person
 
 
-class MovieSearchView(LoginRequiredMixin, MovieListMixin, View):
+class MovieSearchView(LoginRequiredMixin, View):
 
     template_name = 'core/movie_list.html'
 
@@ -50,3 +52,14 @@ class MovieSearchView(LoginRequiredMixin, MovieListMixin, View):
             movies = Movie.objects.filter(title__icontains=query)
             context = {'object_list': movies, 'movie_list': get_movie_list()}
             return render(request, self.template_name, context)
+
+
+class VoteView(LoginRequiredMixin, View):
+
+    def get(self, request, *args, **kwargs):
+        movie = Movie.objects.get(pk=kwargs['pk'])
+        status = kwargs['status']
+        user = self.request.user
+        register_vote(user, movie, status)
+        redirect_url = reverse_lazy('core:movie_detail', args=[movie.id])
+        return HttpResponseRedirect(redirect_url)
