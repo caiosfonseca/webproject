@@ -10,33 +10,33 @@ object { display: none; }
 }
 
 .login-panel{
-  width: 400px;
-  background-color: #f7f7f7;
-  margin: 150px auto;
-  border-radius: 5px 5px 5px 5px;
-  padding: 25px;
+    width: 400px;
+    background-color: #f7f7f7;
+    margin: 150px auto;
+    border-radius: 5px 5px 5px 5px;
+    padding: 25px;
 }
 
 .login-panel > h3{
-  margin:0;
-  margin-bottom: 10px;
+    margin:0;
+    margin-bottom: 10px;
 }
 
 .text-center{
-  text-align: center;
+    text-align: center;
 }
 
 .align-right{
-  text-align: right;
+    text-align: right;
 }
 
 .error-message{
-  color: #a94442 !important;
+    color: #a94442 !important;
 }
 
 .message-alert{
-  padding: 10px;
-  margin-bottom: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 .margin-bottom-0{
@@ -109,22 +109,32 @@ object { display: none; }
 }
 
 .login_links, .login_links > a{
-  text-decoration: none !important;
-  width: 110px;
+    text-decoration: none !important;
+    width: 110px;
 }
 
 .float_left{
-  float: left;
+    float: left;
 }
 
 .float_right{
-  float: right;
+    float: right;
 }
 
 .login_buttons{
-  height: 35px;
+    height: 35px;
 }
 
 .dropdown-menu>li>a {
-  padding: 3px 10px;
+    padding: 3px 10px;
+}
+
+.list_box{
+    text-align: center;
+    padding: 15px;
+    height: 270px;
+}
+
+.list_box > a{
+    text-decoration: none !important;
 }
