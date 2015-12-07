@@ -23,11 +23,18 @@ migrations:
 create_user:
 	python manage.py createsuperuser
 
-fixtures:
+dumpdata:
+	python manage.py dumpdata core.Genre > core/fixtures/genres.json
+	python manage.py dumpdata core.Person > core/fixtures/people.json
+	python manage.py dumpdata core.Movie > core/fixtures/movies.json
+
+loaddata:
 	python manage.py loaddata core/fixtures/genres.json
+	python manage.py loaddata core/fixtures/people.json
+	python manage.py loaddata core/fixtures/movies.json
 
 sync:
 	make clean
 	make new_db
-	make fixtures
+	make loaddata
 	make create_user
