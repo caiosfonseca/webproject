@@ -1,11 +1,24 @@
 {% extends 'core/base.html' %}
 {% block title %}People - {{ object.name }}{% endblock %}
 {% load staticfiles %}
+{% block head %}
+    <script src="{% static 'js/star_rating.js' %}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('span.stars').stars();
+        });
+    </script>
+{% endblock %}
 {% block body_content %}
-  <img alt="{{ object.name }}_profile_pic" src="{{ object.profile_path }}">
-  <p><b>Name:</b> {{ object.name }} ({{ object.nickname }})</p>
-  <p><b>Birthday:</b> {{ object.birthday }} - {{ object.deathday }}</p>
-  <p><b>Place of Birth:</b> {{ object.place_of_birth }}</p>
-  <p><b>Biography:</b> {{ object.biography }}</p>
-  <p><b>Popularity:</b> {{ object.popularity }}</p>
+<div class="col-lg-12">
+    <img class="object_detail_img float_left"alt="{{ object.name }}_profile_pic" src="{{ object.profile_path }}">
+    <div class="object_detail_data float_left">
+        <h2><b>{{ object.name }}</b> {% if object.nickname %}({{ object.nickname }}){% endif %}</h2>
+        <p><b>Born:</b> {{ object.birthday }} in {{ object.place_of_birth }}</p>
+        {% if object.deathday %}<p><b>Deceased:</b>{{ object.deathday }}</p>{% endif %}
+        <p><b>Popularity:</b><span class="stars">{{ object.popularity }}</span></p>
+        <p><b>Biography:</b> {{ object.biography }}</p>
+    </div>
+    
+</div>
 {% endblock %}

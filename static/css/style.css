@@ -138,3 +138,26 @@ object { display: none; }
 .list_box > a{
     text-decoration: none !important;
 }
+
+.object_detail_img{
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    box-shadow: 4px 8px 10px 0px #bbb;
+    margin-right: 15px;
+    width: 305px;
+}
+
+.object_detail_data{
+    width: calc(100% - 320px);
+}
+
+span.stars, span.stars span {
+    display: inline-block;
+    background: url(../img/stars.png) 0 -16px repeat-x;
+    width: 80px;
+    height: 16px;
+}
+
+span.stars span {
+    background-position: 0 0;
+}
