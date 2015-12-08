@@ -75,7 +75,6 @@ object { display: none; }
     list-style: none;
     text-align: center;
     height: 100%;
-    background: #ddd;
     padding: 5px;
     border-radius: 15px;
 }
@@ -121,6 +120,10 @@ object { display: none; }
     float: right;
 }
 
+.inline_block{
+    display: inline-block !important;
+}
+
 .login_buttons{
     height: 35px;
 }
@@ -135,7 +138,7 @@ object { display: none; }
     height: 270px;
 }
 
-.list_box > a{
+a{
     text-decoration: none !important;
 }
 
@@ -160,4 +163,13 @@ span.stars, span.stars span {
 
 span.stars span {
     background-position: 0 0;
+}
+
+.similar_movie{
+    width: 50%;
+}
+
+.like_dislike{
+    margin-top: 20px;
+    margin-bottom: 10px;
 }

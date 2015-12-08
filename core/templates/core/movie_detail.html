@@ -1,22 +1,65 @@
 {% extends 'core/base.html' %}
 {% block title %}People - {{ object.title }}{% endblock %}
 {% load staticfiles %}
+{% block head %}
+    <script src="{% static 'js/star_rating.js' %}"></script>
+    <script src="{% static 'js/movie_detail.js' %}"></script>
+    <script src="{% static 'js/jquery.lbslider.js' %}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('span.stars').stars();
+        });
+    </script>
+{% endblock %}
 {% block body_content %}
-  <div class="col-lg-4">
-    {% if vote %}
-      {% if vote.status == 'like' %}
-        <div class="col-lg-2 btn btn-success" type="button" name="button" href="{% url 'core:vote' object.pk 'like' %}">Like</div>
-        <a class="col-lg-2 btn btn-danger" type="button" name="button" href="{% url 'core:vote' object.pk 'dislike' %}" disabled>Dislike</a>
-      {% else %}
-        <a class="col-lg-2 btn btn-success" type="button" name="button" href="{% url 'core:vote' object.pk 'like' %}" disabled>Like</a>
-        <div class="col-lg-2 btn btn-danger" type="button" name="button" href="{% url 'core:vote' object.pk 'dislike' %}">Dislike</div>
-      {% endif %}
-    {% else %}
-      <a class="col-lg-2 btn btn-success" type="button" name="button" href="{% url 'core:vote' object.pk 'like' %}">Like</a>
-      <a class="col-lg-2 btn btn-danger" type="button" name="button" href="{% url 'core:vote' object.pk 'dislike' %}">Dislike</a>
-    {% endif %}
-  </div>
-  <p><b>Title:</b> {{ object.title }}</p>
-  <p><b>Release Date:</b> {{ object.release_date }}</p>
-  <p><b>Overview</b> {{ object.overview }}</p>
+  <div class="col-lg-12">
+    <img class="object_detail_img float_left"alt="{{ object.title }}_profile_pic" src="{{ object.poster_path }}">
+    <div class="object_detail_data float_left">
+        <h2 class="inline_block float_left"><b>{{ object.title }}</b></h2>
+        <div class="like_dislike float_right">
+            {% if vote %}
+              {% if vote.status == 'like' %}
+                <div class="btn btn-success" type="button" name="button" href="{% url 'core:vote' object.pk 'like' %}">Like</div>
+                <a class="btn btn-danger" type="button" name="button" href="{% url 'core:vote' object.pk 'dislike' %}" disabled>Dislike</a>
+              {% else %}
+                <a class="btn btn-success" type="button" name="button" href="{% url 'core:vote' object.pk 'like' %}" disabled>Like</a>
+                <div class="btn btn-danger" type="button" name="button" href="{% url 'core:vote' object.pk 'dislike' %}">Dislike</div>
+              {% endif %}
+            {% else %}
+              <a class="btn btn-success" type="button" name="button" href="{% url 'core:vote' object.pk 'like' %}">Like</a>
+              <a class="btn btn-danger" type="button" name="button" href="{% url 'core:vote' object.pk 'dislike' %}">Dislike</a>
+            {% endif %}
+        </div>
+        </br>
+        </br>
+        </br>
+        </br>
+        <p><b>Popularity:</b><span class="stars">{{ object.popularity }}</span></p>
+        <p><b>Release Date:</b> {{ object.release_date }}</p>
+        <p><b>Overview</b> {{ object.overview }}</p>
+        <p><b>User Average Rating:</b><span class="stars">{{ object.vote_average }}</span> from {{ object.vote_count }} votes</p>
+        <p><b>Genres:</b>{% for genre in object.genres.all %} {{ genre.name }}{% if not forloop.last %},{% endif %}{% endfor %}</p>
+        <p><b>Director(s):</b>{% for director in object.directors.all %} <a href="{% url 'core:person_detail' director.pk %}">{{ director.name }}</a>{% if not forloop.last %},{% endif %}{% endfor %}</p>
+        {% if object.producers.all %}<p><b>Producer(s):</b>{% for producer in object.producers.all %} <a href="{% url 'core:person_detail' producer.pk %}">{{ producer.name }}</a>{% if not forloop.last %},{% endif %}{% endfor %}</p>{% endif %}
+        <p><b>Casting:</b>{% for cast in object.casting.all %} <a href="{% url 'core:person_detail' cast.pk %}">{{ cast.name }}</a>{% if not forloop.last %},{% endif %}{% endfor %}</p>
+        <hr></hr>
+        <div class="col-md-12">
+            <h3>Similar movies</h3>
+            <div class="slider_similar slider">
+                <ul>
+                    {% for similar in object.similars.all %}
+                        <li>
+                            <a href="{% url 'core:person_detail' similar.pk %}">
+                            <img class="similar_movie" alt="{{ similar.title }}_profile_pic" src="{{ similar.poster_path }}">    
+                            <p>{{ similar.title }}</p>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <a href="#" class="slider-arrow similar_sa-left sa-left"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <a href="#" class="slider-arrow similar_sa-right sa-right"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+    </div>
+  </div>  
 {% endblock %}

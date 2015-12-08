@@ -14,11 +14,10 @@
     <img class="object_detail_img float_left"alt="{{ object.name }}_profile_pic" src="{{ object.profile_path }}">
     <div class="object_detail_data float_left">
         <h2><b>{{ object.name }}</b> {% if object.nickname %}({{ object.nickname }}){% endif %}</h2>
-        <p><b>Born:</b> {{ object.birthday }} in {{ object.place_of_birth }}</p>
+        <p><b>Born:</b> {{ object.birthday }}{% if object.place_of_birth %} in {{ object.place_of_birth }}{% endif %}</p>
         {% if object.deathday %}<p><b>Deceased:</b>{{ object.deathday }}</p>{% endif %}
         <p><b>Popularity:</b><span class="stars">{{ object.popularity }}</span></p>
-        <p><b>Biography:</b> {{ object.biography }}</p>
+        <p><b>Biography:</b> {% if object.biography %}{{ object.biography }}{% else %} This actor doesn't have a biography yet {% endif %}</p>
     </div>
-    
 </div>
 {% endblock %}
