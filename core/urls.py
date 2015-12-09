@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from .views import HomeView
 from .views import VoteView
+from .views import GenreView
 from .views import MovieListView
 from .views import MovieDetailView
 from .views import MovieSearchView
@@ -22,5 +23,6 @@ urlpatterns = [
     url(r'^people_search/$', PersonSearchView.as_view(),
         name='people_search'),
     url(r'^vote/(?P<pk>[\d]+)/(?P<status>[\w]+)/$', VoteView.as_view(),
-        name='vote')
+        name='vote'),
+    url(r'^genre/(?P<pk>[\d]+)/$', GenreView.as_view(), name='genre')
 ]
