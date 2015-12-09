@@ -49,7 +49,7 @@
                 <ul>
                     {% for similar in object.similars.all %}
                         <li>
-                            <a href="{% url 'core:person_detail' similar.pk %}">
+                            <a href="{% url 'core:movie_detail' similar.pk %}">
                             <img class="similar_movie" alt="{{ similar.title }}_profile_pic" src="{{ similar.poster_path }}">    
                             <p>{{ similar.title }}</p>
                             </a>
