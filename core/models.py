@@ -28,6 +28,9 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ['-popularity', '-vote_average']
+
 
 class Person(models.Model):
 
@@ -45,6 +48,9 @@ class Person(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ["-popularity", 'name']
+
 
 class Genre(models.Model):
 
@@ -53,6 +59,9 @@ class Genre(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ["name"]
 
 
 class Vote(models.Model):
