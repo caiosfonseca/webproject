@@ -12,6 +12,8 @@ def recommendations_by_user(user):
     genres = get_genres_from_movies(movies)
 
     recommendations = []
+    recommendations.append(recommendations_most_popular())
+    recommendations.append(recommendations_top_rated())
     for movie in movies:
         recommendations.append(recommendations_by_movie(movie))
     for person in people:
@@ -20,6 +22,22 @@ def recommendations_by_user(user):
         recommendations.append(recommendations_by_genre(genre))
 
     return recommendations
+
+
+def recommendations_most_popular():
+
+    name = 'Most popular movies'
+    movies = Movie.objects.all().order_by('-popularity')[:30]
+    return {'name': name, 'movies': movies}
+
+
+def recommendations_top_rated():
+
+    name = 'Top rated movies'
+    movies = Movie.objects.filter(
+        vote_count__gte=1000
+    ).order_by('-vote_average')[:30]
+    return {'name': name, 'movies': movies}
 
 
 def recommendations_by_movie(movie):
