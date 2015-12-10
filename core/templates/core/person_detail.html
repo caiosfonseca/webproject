@@ -3,6 +3,8 @@
 {% load staticfiles %}
 {% block head %}
     <script src="{% static 'js/star_rating.js' %}"></script>
+    <script src="{% static 'js/movie_detail.js' %}"></script>
+    <script src="{% static 'js/jquery.lbslider.js' %}"></script>
     <script type="text/javascript">
         $(function() {
             $('span.stars').stars();
@@ -18,6 +20,24 @@
         {% if object.deathday %}<p><b>Deceased:</b>{{ object.deathday }}</p>{% endif %}
         <p><b>Popularity:</b><span class="stars">{{ object.popularity }}</span></p>
         <p><b>Biography:</b> {% if object.biography %}{{ object.biography }}{% else %} This actor doesn't have a biography yet {% endif %}</p>
+        <hr></hr>
+        <div class="col-md-12">
+            <h3>Appeard in</h3>
+            <div class="slider_similar slider">
+                <ul>
+                    {% for movie in movies %}
+                        <li>
+                            <a href="{% url 'core:movie_detail' movie.pk %}">
+                            <img class="similar_movie" alt="{{ movie.title }}_profile_pic" src="{{ movie.poster_path }}">
+                            <p>{{ movie.title }}</p>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <a href="#" class="slider-arrow similar_sa-left sa-left"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <a href="#" class="slider-arrow similar_sa-right sa-right"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
     </div>
 </div>
 {% endblock %}

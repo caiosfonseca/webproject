@@ -60,3 +60,16 @@ class GenreMixin(object):
         context = super(GenreMixin, self).get_context_data(**kwargs)
         context['genres'] = Genre.objects.all()
         return context
+
+
+class MovieByPersonMixin(object):
+
+    def get_context_data(self, **kwargs):
+        context = super(MovieByPersonMixin, self).get_context_data(**kwargs)
+        person = Person.objects.get(id=self.kwargs['pk'])
+        movies = []
+        movies += Movie.objects.filter(casting__in=[person])
+        movies += Movie.objects.filter(directors__in=[person])
+        movies += Movie.objects.filter(producers__in=[person])
+        context['movies'] = set(movies)
+        return context

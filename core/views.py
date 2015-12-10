@@ -11,7 +11,7 @@ from braces.views import LoginRequiredMixin
 from core.models import Movie, Person, Genre
 from core.mixins import MovieListMixin, get_movie_list, register_vote
 from core.mixins import PeopleListMixin, get_people_list
-from core.mixins import GetVoteMixin, GenreMixin
+from core.mixins import GetVoteMixin, GenreMixin, MovieByPersonMixin
 
 
 class HomeView(LoginRequiredMixin, MovieListMixin, GenreMixin, TemplateView):
@@ -37,7 +37,7 @@ class PersonListView(LoginRequiredMixin, PeopleListMixin,
 
 
 class PersonDetailView(LoginRequiredMixin, PeopleListMixin,
-                       GenreMixin, DetailView):
+                       GenreMixin, MovieByPersonMixin, DetailView):
 
     model = Person
 
