@@ -1,12 +1,12 @@
-from collections import Counter
+from collections import Counter, OrderedDict
 from core.models import *
 
 
 def recommendations_by_user(user):
 
-    movies_ids = Vote.objects.filter(
-        status='like'
-    ).order_by('-date').values_list('movie', flat=True)[:5]
+    votes = Vote.objects.filter(status='like', user=user).order_by('-date')
+    movies_ids = votes.values_list('movie', flat=True)[:5]
+
     movies = Movie.objects.filter(id__in=movies_ids)
     people = get_people_from_movies(movies)
     genres = get_genres_from_movies(movies)
@@ -69,7 +69,6 @@ def recommendations_by_genre(genre):
 
 def get_people_from_movies(movies):
     """Returns the five most popular people among the movies"""
-
     people_ids = []
     for movie in movies:
         people_ids += movie.casting.all().values_list('id', flat=True)
@@ -87,6 +86,7 @@ def get_genres_from_movies(movies):
     genres_ids = []
     for movie in movies:
         genres_ids += movie.genres.all().values_list('id', flat=True)
-    most_frequent = list(Counter(genres_ids))[:5]
+    counter = Counter(genres_ids).most_common()
+    most_frequent = [pk for (pk, count) in counter][:5]
     genres = Genre.objects.filter(id__in=most_frequent).order_by('name')
     return genres
