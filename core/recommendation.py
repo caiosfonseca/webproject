@@ -60,10 +60,10 @@ def recommendations_by_person(person):
 
 def recommendations_by_genre(genre):
 
-    name = 'Top {0} movies'.format(genre.name)
+    name = 'Most popular {0} movies'.format(genre.name)
     movies = Movie.objects.filter(
         genres__in=[genre]
-    ).order_by('popularity')[:30]
+    ).order_by('-popularity')[:30]
     return {'name': name, 'movies': movies}
 
 
