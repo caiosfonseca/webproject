@@ -25,7 +25,7 @@ def recommendations_by_user(user):
 def recommendations_by_movie(movie):
 
     name = 'Because you liked {0}'.format(movie.title)
-    movies = movie.similars.all()
+    movies = movie.similars.all().order_by('popularity')
     return {'name': name, 'movies': movies}
 
 
@@ -36,7 +36,7 @@ def recommendations_by_person(person):
     movies += Movie.objects.filter(casting__in=[person])
     movies += Movie.objects.filter(directors__in=[person])
     movies += Movie.objects.filter(producers__in=[person])
-    movies = set(movies)
+    movies = sorted(set(movies), key=lambda x: x.popularity, reverse=True)
     return {'name': name, 'movies': movies}
 
 
