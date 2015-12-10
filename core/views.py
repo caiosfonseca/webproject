@@ -12,9 +12,11 @@ from core.models import Movie, Person, Genre
 from core.mixins import MovieListMixin, get_movie_list, register_vote
 from core.mixins import PeopleListMixin, get_people_list
 from core.mixins import GetVoteMixin, GenreMixin, MovieByPersonMixin
+from core.mixins import RecommendationMixin
 
 
-class HomeView(LoginRequiredMixin, MovieListMixin, GenreMixin, TemplateView):
+class HomeView(LoginRequiredMixin, MovieListMixin, GenreMixin,
+               RecommendationMixin, TemplateView):
 
     template_name = 'core/index.html'
 

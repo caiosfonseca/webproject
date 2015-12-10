@@ -74,3 +74,4 @@ class Vote(models.Model):
     user = models.ForeignKey(User)
     movie = models.ForeignKey('Movie')
     status = models.CharField(max_length=7, choices=VOTE_STATUS)
+    date = models.DateTimeField(auto_now_add=True)

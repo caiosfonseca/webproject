@@ -1,7 +1,16 @@
+from core.recommendation import recommendations_by_user
 from core.models import Movie
 from core.models import Vote
 from core.models import Person
 from core.models import Genre
+
+
+class RecommendationMixin(object):
+
+    def get_context_data(self, **kwargs):
+        context = super(RecommendationMixin, self).get_context_data(**kwargs)
+        context['recommendations'] = recommendations_by_user(self.request.user)
+        return context
 
 
 class MovieListMixin(object):
@@ -10,21 +19,6 @@ class MovieListMixin(object):
         context = super(MovieListMixin, self).get_context_data(**kwargs)
         context['movie_list'] = get_movie_list()
         return context
-
-
-def get_movie_list():
-    movie_list = Movie.objects.all()
-    return movie_list
-
-
-def register_vote(user, movie, status):
-
-    try:
-        vote = Vote.objects.get(movie=movie, user=user)
-        vote.status = status
-        vote.save()
-    except Vote.DoesNotExist:
-        Vote.objects.create(movie=movie, user=user, status=status)
 
 
 class GetVoteMixin(object):
@@ -49,11 +43,6 @@ class PeopleListMixin(object):
         return context
 
 
-def get_people_list():
-    people_list = Person.objects.all()
-    return people_list
-
-
 class GenreMixin(object):
 
     def get_context_data(self, **kwargs):
@@ -73,3 +62,23 @@ class MovieByPersonMixin(object):
         movies += Movie.objects.filter(producers__in=[person])
         context['movies'] = set(movies)
         return context
+
+
+def get_movie_list():
+    movie_list = Movie.objects.all()
+    return movie_list
+
+
+def get_people_list():
+    people_list = Person.objects.all()
+    return people_list
+
+
+def register_vote(user, movie, status):
+
+    try:
+        vote = Vote.objects.get(movie=movie, user=user)
+        vote.status = status
+        vote.save()
+    except Vote.DoesNotExist:
+        Vote.objects.create(movie=movie, user=user, status=status)
