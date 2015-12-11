@@ -7,10 +7,10 @@
 {% endblock %}
 {% block body_content %}
     {% for recommendation in recommendations %}
-    <div class="col-md-12">
+    <div class="col-md-12 slider_recommendation">
         <hr></hr>
-        <h3>{{ recommendation.name }}</h3>
-        <div class="slider_recommended slider">
+        <h3 recom_type="{{ recommendation.recommendation_type }}">{{ recommendation.name }}</h3>
+        <div class="{{ recommendation.recommendation_type }} slider">
             <ul>
                 {% for movie in recommendation.movies %}
                     <li>
@@ -22,8 +22,8 @@
                 {% endfor %}
             </ul>
         </div>
-        <a href="#" class="slider-arrow recommended_sa-left sa-left"><span class="glyphicon glyphicon-chevron-left"></span></a>
-        <a href="#" class="slider-arrow recommended_sa-right sa-right"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        <a href="#" class="slider-arrow {{ recommendation.recommendation_type }}-left sa-left"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a href="#" class="slider-arrow {{ recommendation.recommendation_type }}-right sa-right"><span class="glyphicon glyphicon-chevron-right"></span></a>
         <hr></hr>
     </div>
     {% endfor %}

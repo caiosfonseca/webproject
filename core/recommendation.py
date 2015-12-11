@@ -27,44 +27,49 @@ def recommendations_by_user(user):
 def recommendations_most_popular():
 
     name = 'Most popular movies'
+    recommendation_type = 'most_popular'
     movies = Movie.objects.all().order_by('-popularity')[:30]
-    return {'name': name, 'movies': movies}
+    return {'name': name, 'movies': movies, 'recommendation_type': recommendation_type}
 
 
 def recommendations_top_rated():
 
     name = 'Top rated movies'
+    recommendation_type = 'top_rated'
     movies = Movie.objects.filter(
         vote_count__gte=1000
     ).order_by('-vote_average')[:30]
-    return {'name': name, 'movies': movies}
+    return {'name': name, 'movies': movies, 'recommendation_type': recommendation_type}
 
 
 def recommendations_by_movie(movie):
 
     name = 'Because you liked {0}'.format(movie.title)
+    recommendation_type = 'you_liked_{0}'.format(movie.title)
     movies = movie.similars.all().order_by('popularity')
-    return {'name': name, 'movies': movies}
+    return {'name': name, 'movies': movies, 'recommendation_type': recommendation_type}
 
 
 def recommendations_by_person(person):
 
     name = 'Top movies with {0}'.format(person.name)
+    recommendation_type = 'with_{0}'.format(person.name)
     movies = []
     movies += Movie.objects.filter(casting__in=[person])
     movies += Movie.objects.filter(directors__in=[person])
     movies += Movie.objects.filter(producers__in=[person])
     movies = sorted(set(movies), key=lambda x: x.popularity, reverse=True)
-    return {'name': name, 'movies': movies}
+    return {'name': name, 'movies': movies, 'recommendation_type': recommendation_type}
 
 
 def recommendations_by_genre(genre):
 
     name = 'Most popular {0} movies'.format(genre.name)
+    recommendation_type = 'most_popular_{0}'.format(genre.name)
     movies = Movie.objects.filter(
         genres__in=[genre]
     ).order_by('-popularity')[:30]
-    return {'name': name, 'movies': movies}
+    return {'name': name, 'movies': movies, 'recommendation_type': recommendation_type}
 
 
 def get_people_from_movies(movies):
