@@ -23,6 +23,9 @@ def recommendations_by_user(user):
 
     return recommendations
 
+def to_underscore(self):
+  return self.replace(' ', '_')
+
 
 def recommendations_most_popular():
 
@@ -45,7 +48,7 @@ def recommendations_top_rated():
 def recommendations_by_movie(movie):
 
     name = 'Because you liked {0}'.format(movie.title)
-    recommendation_type = 'you_liked_{0}'.format(movie.title)
+    recommendation_type = 'you_liked_{0}'.format(to_underscore(movie.title))
     movies = movie.similars.all().order_by('popularity')
     return {'name': name, 'movies': movies, 'recommendation_type': recommendation_type}
 
@@ -53,7 +56,7 @@ def recommendations_by_movie(movie):
 def recommendations_by_person(person):
 
     name = 'Top movies with {0}'.format(person.name)
-    recommendation_type = 'with_{0}'.format(person.name)
+    recommendation_type = 'with_{0}'.format(to_underscore(person.name))
     movies = []
     movies += Movie.objects.filter(casting__in=[person])
     movies += Movie.objects.filter(directors__in=[person])
@@ -65,7 +68,7 @@ def recommendations_by_person(person):
 def recommendations_by_genre(genre):
 
     name = 'Most popular {0} movies'.format(genre.name)
-    recommendation_type = 'most_popular_{0}'.format(genre.name)
+    recommendation_type = 'most_popular_{0}'.format(to_underscore(genre.name))
     movies = Movie.objects.filter(
         genres__in=[genre]
     ).order_by('-popularity')[:30]
