@@ -38,7 +38,7 @@
         <p><b>Release Date:</b> {{ object.release_date }}</p>
         <p><b>Overview</b> {{ object.overview }}</p>
         <p><b>User Average Rating:</b><span class="stars">{{ object.vote_average }}</span> from {{ object.vote_count }} votes</p>
-        <p><b>Genres:</b>{% for genre in object.genres.all %} {{ genre.name }}{% if not forloop.last %},{% endif %}{% endfor %}</p>
+        <p><b>Genres:</b>{% for genre in object.genres.all %} <a href="{% url 'core:genre' genre.pk %}">{{ genre.name }}</a>{% if not forloop.last %},{% endif %}{% endfor %}</p>
         <p><b>Director(s):</b>{% for director in object.directors.all %} <a href="{% url 'core:person_detail' director.pk %}">{{ director.name }}</a>{% if not forloop.last %},{% endif %}{% endfor %}</p>
         {% if object.producers.all %}<p><b>Producer(s):</b>{% for producer in object.producers.all %} <a href="{% url 'core:person_detail' producer.pk %}">{{ producer.name }}</a>{% if not forloop.last %},{% endif %}{% endfor %}</p>{% endif %}
         <p><b>Casting:</b>{% for cast in object.casting.all %} <a href="{% url 'core:person_detail' cast.pk %}">{{ cast.name }}</a>{% if not forloop.last %},{% endif %}{% endfor %}</p>
